@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'users',  # Custom users app
     'core',   # Core services and utilities
     'finance', # Agri-Finance & Insurance
+    'market',  # Marketplace
+    'knowledge', # Policy & Knowledge
 ]
 
 MIDDLEWARE = [
