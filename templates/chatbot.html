@@ -1,0 +1,24 @@
+<div id="chatbot-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    <button id="chatbot-toggle" class="btn btn-primary"
+        style="border-radius: 50%; width: 60px; height: 60px; font-size: 2rem; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">🤖</button>
+
+    <div id="chatbot-window"
+        style="display: none; width: 300px; height: 400px; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; position: absolute; bottom: 70px; right: 0;">
+        <div
+            style="background: var(--primary-color); color: white; padding: 1rem; font-weight: bold; display: flex; justify-content: space-between;">
+            <span>Agri-Advisor AI</span>
+            <span id="chatbot-close" style="cursor: pointer;">&times;</span>
+        </div>
+        <div id="chatbot-messages" style="flex-grow: 1; padding: 1rem; overflow-y: auto; background: #f9f9f9;">
+            <div style="margin-bottom: 0.5rem; color: #555;"><strong>AI:</strong> Hello! Ask me about crops, loans, or
+                weather.</div>
+        </div>
+        <div style="padding: 0.5rem; border-top: 1px solid #eee; display: flex;">
+            <input type="text" id="chatbot-input" placeholder="Type a message..."
+                style="flex-grow: 1; border: 1px solid #ddd; padding: 0.5rem; border-radius: 4px;">
+            <button id="chatbot-send" class="btn btn-accent" style="margin-left: 0.5rem;">Send</button>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/chatbot.js"></script>

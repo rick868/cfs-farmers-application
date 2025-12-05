@@ -1,30 +1,39 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Farmer Support Platform{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/static/service-worker.js')
+                .then(() => console.log('Service Worker Registered'));
+        }
+    </script>
 </head>
+
 <body>
     <header>
         <a href="/" class="logo">🌾 AgriConnect</a>
         <nav>
             <ul>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                    <li><a href="#">Finance</a></li>
-                    <li><a href="#">Insurance</a></li>
-                    <li>
-                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-secondary" style="background:none; border:none; color:inherit; cursor:pointer;">Logout</button>
-                        </form>
-                    </li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="#">Finance</a></li>
+                <li><a href="#">Insurance</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-secondary"
+                            style="background:none; border:none; color:inherit; cursor:pointer;">Logout</button>
+                    </form>
+                </li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -32,11 +41,11 @@
 
     <main class="container">
         {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
         {% endif %}
 
         {% block content %}
@@ -46,5 +55,8 @@
     <footer style="text-align: center; padding: 2rem; color: #777;">
         &copy; 2024 Farmer Support Platform. Empowering Agriculture.
     </footer>
+
+    {% include 'chatbot.html' %}
 </body>
+
 </html>

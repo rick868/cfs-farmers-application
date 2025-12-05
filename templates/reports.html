@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Analytics & Reports</h1>
+
+    <div class="grid">
+        <div class="card">
+            <h3>📉 Yield Report (2024)</h3>
+            <p>Summary of your harvest and performance against regional averages.</p>
+            <button onclick="alert('Downloading PDF...')" class="btn btn-primary">Download PDF</button>
+        </div>
+        <div class="card">
+            <h3>💰 Financial Statement</h3>
+            <p>Annual breakdown of loans, insurance premiums, and market sales.</p>
+            <button onclick="alert('Downloading CSV...')" class="btn btn-secondary">Download CSV</button>
+        </div>
+        <div class="card">
+            <h3>🌦️ Weather History</h3>
+            <p>Detailed rainfall and temperature logs for your location.</p>
+            <button onclick="alert('Downloading PDF...')" class="btn btn-accent">Download PDF</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,9 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse, HttpResponse
+import json
 from .forms import CustomUserCreationForm
 from core.services import get_weather_data, get_market_prices, get_farming_tips, get_officer_stats
 
@@ -31,3 +33,19 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 'recent_alerts': ["Fall Armyworm detected in Sector 4", "Heavy rains expected next week"]
             })
         return context
+
+class DownloadDataView(LoginRequiredMixin, View):
+    def get(self, request):
+        user_data = {
+            'username': request.user.username,
+            'email': request.user.email,
+            'role': request.user.role,
+            'date_joined': str(request.user.date_joined),
+        }
+        # Ideally, we would fetch related loans, listings etc. here
+        response = HttpResponse(json.dumps(user_data, indent=4), content_type='application/json')
+        response['Content-Disposition'] = f'attachment; filename="{request.user.username}_data.json"'
+        return response
+
+class PrivacyPolicyView(TemplateView):
+    template_name = 'privacy.html'
