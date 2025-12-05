@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+</div> <!-- Close container from base temporarily -->
+
+<!-- Hero Section with Parallax Background -->
+<div class="hero" style="margin-top: -2rem;">
+    <h1>Empowering African Farmers</h1>
+    <p>Join the revolution in modern agriculture. Access affordable micro-loans, instant crop insurance, and real-time
+        market data in one unified platform.</p>
+
+    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+        {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}" class="btn btn-accent"
+            style="font-size: 1.2rem; padding: 1rem 2.5rem; box-shadow: 0 4px 15px rgba(230, 81, 0, 0.4);">Go to
+            Dashboard</a>
+        {% else %}
+        <a href="{% url 'signup' %}" class="btn btn-accent"
+            style="font-size: 1.2rem; padding: 1rem 2.5rem; box-shadow: 0 4px 15px rgba(230, 81, 0, 0.4);">Get
+            Started</a>
+        <a href="{% url 'login' %}" class="btn"
+            style="background: white; color: #333; font-size: 1.2rem; padding: 1rem 2.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">Member
+            Login</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="section-title">Why Leading Farmers Choose Us</h2>
+    <p class="section-subtitle">Everything you need to grow your agribusiness, available at your fingertips.</p>
+
+    <div class="grid">
+        <div class="card feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Agri-Finance</h3>
+            <p>Secure micro-loans for certified seeds and fertilizers with flexible repayment terms aligned to your
+                harvest season.</p>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Crop Insurance</h3>
+            <p>Shield your hard work. Get instant coverage against unpredictable weather, pests, and market
+                fluctuations.</p>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>Market Access</h3>
+            <p>Bypass middlemen. Connect directly with buyers and view real-time prices to maximize your profits.</p>
+        </div>
+        <div class="card feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>Smart Advice</h3>
+            <p>Our AI-powered Agri-Advisor is available 24/7 to answer your questions on pests, soil, and weather.</p>
+        </div>
+    </div>
+
+    <!-- Partner Logo Wall -->
+    <div style="margin-top: 6rem; text-align: center;">
+        <h3 style="color: #444; font-size: 1.8rem; margin-bottom: 2rem;">Trusted by Industry Leaders</h3>
+
+        <div class="partner-logos">
+            <div class="partner-logo">
+                <span class="brand-equity" style="font-size: 2rem;">🏛️</span>
+                <span>Equity Bank</span>
+            </div>
+            <div class="partner-logo">
+                <span class="brand-kcb" style="font-size: 2rem;">🦁</span>
+                <span>KCB Group</span>
+            </div>
+            <div class="partner-logo">
+                <span class="brand-digifarm" style="font-size: 2rem;">🚜</span>
+                <span>DigiFarm</span>
+            </div>
+            <div class="partner-logo">
+                <span class="brand-govt" style="font-size: 2rem;">🇰🇪</span>
+                <span>Ministry of Agriculture</span>
+            </div>
+            <div class="partner-logo">
+                <span style="color: #00A651; font-size: 2rem;">🌱</span>
+                <span>Kenya Seed Co.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="cta-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Harvest Success?</h2>
+        <p style="margin-bottom: 2.5rem; font-size: 1.3rem; opacity: 0.9;">Join a community of over 10,000 farmers
+            transforming their yield.</p>
+        <a href="{% url 'signup' %}" class="btn"
+            style="background: white; color: var(--primary-color); font-weight: 800; font-size: 1.2rem; padding: 1rem 3rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">Create
+            Your Free Account</a>
+    </div>
+    {% endblock %}
