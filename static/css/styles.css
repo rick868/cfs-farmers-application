@@ -418,3 +418,27 @@ nav a.active {
 .footer-col ul li a:hover {
     color: var(--secondary-color);
 }
+/* Animated Partner Logos */
+.partner-logos-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 2rem 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.partner-logos-track {
+    display: inline-flex;
+    gap: 3rem;
+    animation: scroll 20s linear infinite;
+    animation-delay: 2s; /* Requested delay */
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+
+.partner-logos-track:hover {
+    animation-play-state: paused;
+}
