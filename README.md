@@ -1,4 +1,4 @@
-# Farmer Support Platform (AgriConnect)
+# Farmer Support Platform (Agri360)
 
 A full-stack Django application design to empower smallholder farmers with access to finance, markets, and expert knowledge.
 
@@ -10,9 +10,6 @@ A full-stack Django application design to empower smallholder farmers with acces
 *   **AI Agri-Advisor**: A chatbot for instant agricultural advice.
 *   **Analytics**: Downloadable yield and financial reports.
 
-## Walkthrough Video
-Here is the verification walkthrough of the final platform, demonstrating the Landing Page, Dashboard, and key features.
-![Walkthrough](/home/felix/.gemini/antigravity/brain/8b77a762-ac78-4348-83a1-eeddca13699e/landing_page_verify_1764961794196.webp)
 
 ## Getting Started
 
