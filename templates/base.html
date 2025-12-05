@@ -40,11 +40,13 @@
         </nav>
     </header>
 
-    <main class="container">
+    <main class="{% block main_class %}container{% endblock %}">
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+        <div class="container"> <!-- Ensure alerts are always contained -->
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
         </div>
         {% endfor %}
         {% endif %}
@@ -53,9 +55,7 @@
         {% endblock %}
     </main>
 
-    <footer style="text-align: center; padding: 2rem; color: #777;">
-        &copy; 2024 Farmer Support Platform. Empowering Agriculture.
-    </footer>
+    {% include 'footer.html' %}
 
     {% include 'chatbot.html' %}
 </body>

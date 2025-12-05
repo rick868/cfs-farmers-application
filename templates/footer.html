@@ -1,0 +1,38 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>🌾 Agri360</h3>
+                <p>Empowering farmers with technology, finance, and market access. Join us in transforming agriculture.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'marketplace' %}">Marketplace</a></li>
+                    <li><a href="{% url 'loan_request' %}">Agri-Finance</a></li>
+                    <li><a href="{% url 'insurance_apply' %}">Insurance</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal & Support</h4>
+                <ul>
+                    <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Support Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p>📍 Nairobi, Kenya</p>
+                <p>📧 support@agri360.com</p>
+                <p>📞 +254 700 123 456</p>
+            </div>
+        </div>
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 2rem 0;">
+        <div style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
+            &copy; {% now "Y" %} Agri360 Platform. All rights reserved.
+        </div>
+    </div>
+</footer>
