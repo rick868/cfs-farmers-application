@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',  # Custom users app
     'core',   # Core services and utilities
+    'finance', # Agri-Finance & Insurance
 ]
 
 MIDDLEWARE = [
