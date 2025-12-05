@@ -9,5 +9,6 @@ urlpatterns = [
     path('finance/', include('finance.urls')),
     path('market/', include('market.urls')),
     path('knowledge/', include('knowledge.urls')),
+    path('core/', include('core.urls')),
     path('', TemplateView.as_view(template_name='base.html'), name='home'), # Homepage
 ]
