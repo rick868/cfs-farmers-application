@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Sell Your Produce</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Post Listing</button>
+    </form>
+</div>
+{% endblock %}

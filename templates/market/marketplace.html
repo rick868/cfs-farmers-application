@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1 style="color: var(--primary-color);">Marketplace</h1>
+        <a href="{% url 'create_listing' %}" class="btn btn-primary">+ Sell Produce</a>
+    </div>
+
+    <!-- Listings Grid -->
+    <div class="grid">
+        {% for listing in listings %}
+        <div class="card" style="padding: 0; overflow: hidden;">
+            {% if listing.image %}
+            <img src="{{ listing.image.url }}" alt="{{ listing.crop_name }}"
+                style="width: 100%; height: 200px; object-fit: cover;">
+            {% else %}
+            <div
+                style="width: 100%; height: 200px; background-color: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">
+                No Image
+            </div>
+            {% endif %}
+            <div style="padding: 1rem;">
+                <h3 style="margin-top: 0; margin-bottom: 0.5rem;">{{ listing.crop_name }}</h3>
+                <p style="color: #666; margin-bottom: 0.5rem;">{{ listing.quantity }} • <strong>KES {{
+                        listing.price_per_unit }}</strong></p>
+                <p style="font-size: 0.9rem; color: #888;">📍 {{ listing.location }}</p>
+                <p style="font-size: 0.9rem;">Seller: {{ listing.seller.username }}</p>
+                <a href="#" class="btn btn-accent"
+                    style="width: 100%; display: block; text-align: center; margin-top: 1rem;">Contact Seller</a>
+            </div>
+        </div>
+        {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; color: #777;">
+            <p>No listings yet. Be the first to sell!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

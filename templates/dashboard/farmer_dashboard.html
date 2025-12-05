@@ -47,7 +47,16 @@
         </div>
         <div style="margin-top: 0.5rem;">
             <a href="{% url 'financial_literacy' %}" class="btn btn-primary"
-                style="width: 100%; text-align: center; background-color: #0288D1;">Financial Tips</a>
+                style="width: 100%; text-align: center; background-color: #0288D1; margin-bottom: 0.5rem;">Financial
+                Tips</a>
+            <a href="{% url 'marketplace' %}" class="btn btn-accent"
+                style="width: 100%; text-align: center; margin-bottom: 0.5rem;">Sell Produce</a>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                <a href="{% url 'policy_list' %}" class="btn btn-secondary"
+                    style="text-align: center; font-size: 0.9rem;">Policy Center</a>
+                <a href="{% url 'service_locator' %}" class="btn btn-secondary"
+                    style="text-align: center; font-size: 0.9rem;">Find Services</a>
+            </div>
         </div>
     </div>
 </div>

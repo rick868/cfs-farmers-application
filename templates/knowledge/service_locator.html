@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="max-width: 100%; padding: 0;">
+    <h1 style="text-align: center; margin-bottom: 1rem;">Service Locator</h1>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    var map = L.map('map').setView([-1.2921, 36.8219], 10); // Center on Nairobi
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Mock Service Data
+    var services = [
+        { name: "Nairobi Central Vet", lat: -1.28, lng: 36.82, type: "Vet" },
+        { name: "Agri-Store Westlands", lat: -1.26, lng: 36.79, type: "Agro-Dealer" },
+        { name: "KCC Cooling Plant", lat: -1.30, lng: 36.85, type: "Cold Storage" },
+        { name: "Extension Office HQ", lat: -1.29, lng: 36.81, type: "Office" },
+    ];
+
+    services.forEach(function (s) {
+        L.marker([s.lat, s.lng]).addTo(map)
+            .bindPopup(`<b>${s.name}</b><br>${s.type}`);
+    });
+</script>
+{% endblock %}

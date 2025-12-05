@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Policy & Compliance Center</h1>
+
+    <form method="get" style="margin-bottom: 2rem; display: flex; gap: 1rem;">
+        <input type="text" name="q" placeholder="Search policies..."
+            style="flex-grow: 1; padding: 0.8rem; border: 1px solid #ddd; border-radius: 6px;">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <div class="grid" style="grid-template-columns: 1fr;">
+        {% for policy in policies %}
+        <div class="card" style="border-left: 5px solid var(--secondary-color);">
+            <div style="display: flex; justify-content: space-between;">
+                <h3>{{ policy.title }}</h3>
+                <span style="background: #eee; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">{{
+                    policy.region }}</span>
+            </div>
+            <p>{{ policy.summary }}</p>
+            <div style="margin-top: 1rem;">
+                <span style="color: #666; font-size: 0.9rem;">Category: {{ policy.category }}</span>
+                {% if policy.external_link %}
+                <a href="{{ policy.external_link }}" target="_blank" class="btn btn-secondary"
+                    style="float: right;">View Document</a>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No policies found matching your search.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
