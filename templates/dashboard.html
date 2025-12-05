@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h1>Welcome, {{ user.username }}!</h1>
+    <p>You are logged in as a <strong>{{ user.get_role_display }}</strong>.</p>
+</div>
+
+<div class="grid">
+    {% if user.role == "FARMER" %}
+    <div class="card">
+        <h3>🌩️ Weather Forecast</h3>
+        <p>Sunny, 25°C. Chance of rain: 10%.</p>
+    </div>
+    <div class="card">
+        <h3>💰 Market Prices</h3>
+        <p>Maize: KES 4,500 / 90kg</p>
+        <p>Beans: KES 8,000 / 90kg</p>
+    </div>
+    <div class="card">
+        <h3>🌱 Crop Health</h3>
+        <p>No alerts for your region.</p>
+        <a href="#" class="btn btn-accent">Request Inspection</a>
+    </div>
+    {% elif user.role == "OFFICER" %}
+    <div class="card">
+        <h3>👨‍🌾 Assigned Farmers</h3>
+        <p>You have 15 farmers in your region.</p>
+    </div>
+    <div class="card">
+        <h3>📢 Broadcast Alert</h3>
+        <p>Send warnings about Fall Armyworm.</p>
+        <a href="#" class="btn btn-accent">Create Alert</a>
+    </div>
+    {% else %}
+    <div class="card">
+        <h3>System Status</h3>
+        <p>All systems operational.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

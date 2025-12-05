@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container" style="max-width: 500px;">
+    <h2>Create Account</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Loop through form fields for better control if needed, 
+             or just use as_p for quick prototype -->
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <div style="color: red">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+    </form>
+    <p style="margin-top: 1rem;">
+        Already have an account? <a href="{% url 'login' %}">Login here</a>.
+    </p>
+</div>
+{% endblock %}
