@@ -11,6 +11,10 @@
     --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
@@ -123,6 +127,7 @@ nav a.active {
     cursor: pointer;
     transition: background 0.3s, transform 0.1s;
     border: none;
+    text-align: center;
 }
 
 .btn-primary {
@@ -132,6 +137,16 @@ nav a.active {
 
 .btn-primary:hover {
     background-color: #1B5E20;
+}
+
+.btn-secondary {
+    background-color: #757575;
+    /* Grey */
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #616161;
 }
 
 .btn-accent {
