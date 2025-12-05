@@ -10,5 +10,5 @@ urlpatterns = [
     path('market/', include('market.urls')),
     path('knowledge/', include('knowledge.urls')),
     path('core/', include('core.urls')),
-    path('', TemplateView.as_view(template_name='base.html'), name='home'), # Homepage
+    path('', TemplateView.as_view(template_name='home.html'), name='home'), # Homepage
 ]
