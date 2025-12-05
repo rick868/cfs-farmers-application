@@ -1,0 +1,45 @@
+<div class="grid">
+    <div class="card">
+        <h3>Overview</h3>
+        <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">{{ stats.region }} Region</div>
+        <p>Assigned Farmers: <strong>{{ stats.assigned_farmers }}</strong></p>
+        <p>Pending Visits: <strong>{{ stats.pending_visits }}</strong></p>
+    </div>
+
+    <div class="card" style="background-color: #FFF3E0; border-color: #FFE0B2;">
+        <h3 style="color: #E65100;">⚠️ Active Alerts</h3>
+        <ul style="padding-left: 1.2rem;">
+            {% for alert in recent_alerts %}
+            <li>{{ alert }}</li>
+            {% endfor %}
+        </ul>
+        <button class="btn btn-accent" style="width: 100%; margin-top: 1rem;">Broadcast New Alert</button>
+    </div>
+</div>
+
+<div class="card">
+    <h3>🌾 Regional Crop Distribution</h3>
+    <canvas id="cropChart" style="max-height: 400px;"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('cropChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Maize', 'Tea', 'Coffee', 'Horticulture'],
+            datasets: [{
+                label: 'Farmers Cultivating',
+                data: [45, 25, 20, 10],
+                backgroundColor: [
+                    '#FFD54F',
+                    '#66BB6A',
+                    '#8D6E63',
+                    '#AB47BC'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+</script>

@@ -1,0 +1,79 @@
+<div class="card weather-widget">
+    <h3>Forecast for {{ weather.location }}</h3>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="font-size: 3rem;">
+            {% if weather.condition == "Sunny" %}☀️
+            {% elif weather.condition == "Rainy" %}🌧️
+            {% elif weather.condition == "Cloudy" %}☁️
+            {% else %}⛅{% endif %}
+        </div>
+        <div style="text-align: right;">
+            <div style="font-size: 2rem; font-weight: bold;">{{ weather.temperature }}°C</div>
+            <div>{{ weather.condition }}</div>
+            <div>Rain Chance: {{ weather.rain_chance }}%</div>
+        </div>
+    </div>
+    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">
+        Today, {{ weather.date }}
+    </div>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <h3>💰 Market Prices</h3>
+        <div class="market-ticker">
+            {% for item in market_prices %}
+            <div class="market-ticker-item">
+                <span>{{ item.crop }}</span>
+                <span style="font-weight: bold;">KES {{ item.price }}</span>
+                <span class="{% if '+' in item.change %}price-up{% else %}price-down{% endif %}">{{ item.change
+                    }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem; text-align: center;">View All
+            Markets</a>
+    </div>
+
+    <div class="card">
+        <h3>💡 Daily Farming Tip</h3>
+        <p style="font-style: italic; font-size: 1.1rem; color: #555;">"{{ farming_tip }}"</p>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
+        <h4>Actions</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <a href="#" class="btn btn-accent" style="text-align: center;">Request Loan</a>
+            <a href="#" class="btn btn-secondary"
+                style="text-align: center; color: white; background-color: #555;">Insure Crops</a>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>📊 Yield History (Bags/Acre)</h3>
+    <canvas id="yieldChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('yieldChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['2023 Season 1', '2023 Season 2', '2024 Season 1', '2024 Season 2'],
+            datasets: [{
+                label: 'Maize Yield (Bags)',
+                data: [12, 19, 15, 22],
+                backgroundColor: 'rgba(46, 125, 50, 0.6)',
+                borderColor: 'rgba(46, 125, 50, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
