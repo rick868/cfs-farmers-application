@@ -1,10 +1,8 @@
+/* Existing Styles... */
 :root {
     --primary-color: #2E7D32;
-    /* Rich Green */
     --secondary-color: #81C784;
-    /* Light Green */
     --accent-color: #FF6F00;
-    /* Vibrant Orange for CTA */
     --text-color: #333333;
     --bg-color: #f4f6f8;
     --card-bg: #ffffff;
@@ -31,6 +29,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
@@ -38,6 +39,9 @@ header {
     font-weight: bold;
     color: var(--primary-color);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 nav ul {
@@ -62,13 +66,12 @@ nav a.active {
 
 /* Glassmorphism Cards */
 .card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
     margin-bottom: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease-in-out;
 }
 
@@ -80,7 +83,6 @@ nav a.active {
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* Increased min-width */
     gap: 2rem;
 }
 
@@ -125,7 +127,7 @@ nav a.active {
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
+    transition: all 0.3s;
     border: none;
     text-align: center;
 }
@@ -137,11 +139,11 @@ nav a.active {
 
 .btn-primary:hover {
     background-color: #1B5E20;
+    transform: translateY(-1px);
 }
 
 .btn-secondary {
     background-color: #757575;
-    /* Grey */
     color: white;
 }
 
@@ -156,6 +158,7 @@ nav a.active {
 
 .btn-accent:hover {
     background-color: #E65100;
+    transform: translateY(-1px);
 }
 
 .container {
@@ -164,7 +167,7 @@ nav a.active {
     padding: 0 1rem;
 }
 
-/* Auth Forms (Reusing existing structures, just tweaking spacing a l) */
+/* Auth Forms */
 .auth-container {
     max-width: 400px;
     margin: 5rem auto;
@@ -217,4 +220,140 @@ nav a.active {
 .alert-error {
     background: #FFEBEE;
     color: #C62828;
+}
+
+/* LANDING PAGE SPECIFIC */
+.hero {
+    /* Using a stunning agricultural landscape */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1625246333195-58197bf075e6?auto=format&fit=crop&q=80&w=1920');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Parallax effect */
+    color: white;
+    padding: 10rem 2rem;
+    text-align: center;
+    border-radius: 0 0 50% 50% / 30px;
+    margin-bottom: 4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 4px solid transparent;
+}
+
+.feature-card:hover {
+    border-top: 4px solid var(--accent-color);
+}
+
+.feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background: #f0fdf4;
+    padding: 1rem;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    /* Vertically center emoji */
+}
+
+/* Partner Logo Wall */
+.partner-logos {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.partner-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #444;
+    opacity: 0.7;
+    transition: all 0.3s;
+    background: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+.partner-logo:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand Colors for "Real" feel */
+.brand-equity {
+    color: #8B0000;
+}
+
+/* Maroon */
+.brand-kcb {
+    color: #87CD38;
+}
+
+/* Light Green */
+.brand-digifarm {
+    color: #2E7D32;
+}
+
+/* Dark Green */
+.brand-govt {
+    color: #000;
+}
+
+/* Black */
+
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1b5e20 100%);
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 6rem;
+    box-shadow: 0 20px 40px rgba(46, 125, 50, 0.2);
 }
