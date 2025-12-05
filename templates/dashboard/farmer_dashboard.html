@@ -41,9 +41,13 @@
         <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
         <h4>Actions</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-            <a href="#" class="btn btn-accent" style="text-align: center;">Request Loan</a>
-            <a href="#" class="btn btn-secondary"
+            <a href="{% url 'loan_request' %}" class="btn btn-accent" style="text-align: center;">Request Loan</a>
+            <a href="{% url 'insurance_apply' %}" class="btn btn-secondary"
                 style="text-align: center; color: white; background-color: #555;">Insure Crops</a>
+        </div>
+        <div style="margin-top: 0.5rem;">
+            <a href="{% url 'financial_literacy' %}" class="btn btn-primary"
+                style="width: 100%; text-align: center; background-color: #0288D1;">Financial Tips</a>
         </div>
     </div>
 </div>

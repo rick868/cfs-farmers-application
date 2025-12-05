@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container" style="max-width: 800px; text-align: left;">
+    <h2 style="text-align: center; color: var(--primary-color);">Request Micro-Credit</h2>
+
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <div style="color: red; font-size: 0.8rem;">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+            </form>
+        </div>
+
+        <div class="card" style="margin-bottom: 0; background-color: #E8F5E9; border: 1px solid #C8E6C9;">
+            <h3 style="margin-top: 0; color: var(--primary-color);">Repayment Preview</h3>
+            <p>Based on 12% annual interest.</p>
+            <hr>
+            <div id="calc-result" style="display: none;">
+                <p>Monthly Installment: <strong id="monthly-text">KES 0</strong></p>
+                <p>Total Interest: <strong id="interest-text" style="color: #E65100;">KES 0</strong></p>
+                <p>Total Payable: <strong id="total-text">KES 0</strong></p>
+            </div>
+            <div id="calc-placeholder" style="color: #777; font-style: italic;">
+                Enter amount and period to see estimation.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const amountInput = document.querySelector('input[name="amount"]');
+    const periodInput = document.querySelector('input[name="repayment_period"]');
+    const resultDiv = document.getElementById('calc-result');
+    const placeholderDiv = document.getElementById('calc-placeholder');
+
+    function updateCalculation() {
+        const amount = amountInput.value;
+        const months = periodInput.value;
+
+        if (amount && months) {
+            fetch(`/finance/api/calc-loan/?amount=${amount}&months=${months}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('monthly-text').textContent = `KES ${data.monthly_installment}`;
+                    document.getElementById('interest-text').textContent = `KES ${data.total_interest}`;
+                    document.getElementById('total-text').textContent = `KES ${data.total_payable}`;
+
+                    resultDiv.style.display = 'block';
+                    placeholderDiv.style.display = 'none';
+                });
+        }
+    }
+
+    amountInput.addEventListener('input', updateCalculation);
+    periodInput.addEventListener('input', updateCalculation);
+</script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container" style="max-width: 800px; text-align: left;">
+    <h2 style="text-align: center; color: var(--primary-color);">Apply for Crop Insurance</h2>
+
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-accent" style="width: 100%;">Get Insured</button>
+            </form>
+        </div>
+
+        <div class="card" style="margin-bottom: 0; background-color: #FFF3E0; border: 1px solid #FFE0B2;">
+            <h3 style="margin-top: 0; color: #E65100;">Premium Estimate</h3>
+            <p>Calculated based on crop risk factor.</p>
+            <hr>
+            <div id="premium-result" style="display: none;">
+                <p>Risk Rate: <strong id="rate-text">5%</strong></p>
+                <div style="font-size: 1.5rem; font-weight: bold; margin-top: 1rem; color: var(--primary-color);">
+                    KES <span id="premium-amount">0.00</span>
+                </div>
+                <small>Payable annually</small>
+            </div>
+            <div id="premium-placeholder" style="color: #777; font-style: italic;">
+                Select crop and coverage amount.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const cropInput = document.querySelector('select[name="crop_type"]');
+    const coverageInput = document.querySelector('input[name="coverage_amount"]');
+    const resultDiv = document.getElementById('premium-result');
+    const placeholderDiv = document.getElementById('premium-placeholder');
+
+    function updatePremium() {
+        const crop = cropInput.value;
+        const coverage = coverageInput.value;
+
+        if (crop && coverage) {
+            fetch(`/finance/api/calc-premium/?crop=${crop}&coverage=${coverage}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('rate-text').textContent = `${data.rate_percentage}%`;
+                    document.getElementById('premium-amount').textContent = data.premium;
+
+                    resultDiv.style.display = 'block';
+                    placeholderDiv.style.display = 'none';
+                });
+        }
+    }
+
+    cropInput.addEventListener('change', updatePremium);
+    coverageInput.addEventListener('input', updatePremium);
+</script>
+{% endblock %}
