@@ -31,8 +31,7 @@
             </div>
             {% endfor %}
         </div>
-        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem; text-align: center;">View All
-            Markets</a>
+        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">View All Markets</a>
     </div>
 
     <div class="card">
@@ -41,23 +40,20 @@
         <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
         <h4>Actions</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-            <a href="{% url 'reports' %}" class="btn btn-secondary" style="text-align: center; color: white;">My
-                Reports</a>
-            <a href="{% url 'download_data' %}" class="btn btn-secondary"
-                style="text-align: center; color: white;">Download Data</a>
+            <a href="{% url 'reports' %}" class="btn btn-secondary">My Reports</a>
+            <a href="{% url 'download_data' %}" class="btn btn-secondary">Download Data</a>
         </div>
         <h4>Quick Links</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-            <a href="{% url 'loan_request' %}" class="btn btn-accent" style="text-align: center;">Request Loan</a>
-            <a href="{% url 'insurance_apply' %}" class="btn btn-secondary"
-                style="text-align: center; color: white; background-color: #555;">Insure Crops</a>
+            <a href="{% url 'loan_request' %}" class="btn btn-accent">Request Loan</a>
+            <a href="{% url 'insurance_apply' %}" class="btn btn-secondary" style="background-color: #555;">Insure
+                Crops</a>
         </div>
         <div style="margin-top: 0.5rem;">
             <a href="{% url 'financial_literacy' %}" class="btn btn-primary"
-                style="width: 100%; text-align: center; background-color: #0288D1; margin-bottom: 0.5rem;">Financial
-                Tips</a>
-            <a href="{% url 'marketplace' %}" class="btn btn-accent"
-                style="width: 100%; text-align: center; margin-bottom: 0.5rem;">Sell Produce</a>
+                style="width: 100%; background-color: #0288D1; margin-bottom: 0.5rem;">Financial Tips</a>
+            <a href="{% url 'marketplace' %}" class="btn btn-accent" style="width: 100%; margin-bottom: 0.5rem;">Sell
+                Produce</a>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
                 <a href="{% url 'policy_list' %}" class="btn btn-secondary"
                     style="text-align: center; font-size: 0.9rem;">Policy Center</a>
