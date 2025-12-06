@@ -20,31 +20,54 @@ document.addEventListener('DOMContentLoaded', function () {
         bubble.style.borderRadius = '12px';
         bubble.style.background = isUser ? '#E8F5E9' : '#fff';
         bubble.style.border = isUser ? 'none' : '1px solid #eee';
-        bubble.textContent = text;
+        // Allow rendering HTML for bolding/formatting
+        bubble.innerHTML = text;
 
         div.appendChild(bubble);
         messages.appendChild(div);
         messages.scrollTop = messages.scrollHeight;
     }
 
-    function getResponse(query) {
-        query = query.toLowerCase();
-        if (query.includes('weather')) return "The weather is currently sunny with a 10% chance of rain.";
-        if (query.includes('loan')) return "You can request a loan from the Finance section. Interest is 12% p.a.";
-        if (query.includes('market') || query.includes('price')) return "Maize is trading at KES 4,500. Check the Marketplace for more.";
-        if (query.includes('pest') || query.includes('disease')) return "For pest issues, please report to your Extension Officer immediately via the Dashboard.";
-        return "I'm not sure about that. Try asking about weather, loans, or market prices.";
-    }
-
-    function handleSend() {
+    async function handleSend() {
         const text = input.value.trim();
         if (text) {
             addMessage('You', text, true);
             input.value = '';
-            setTimeout(() => {
-                const response = getResponse(text);
-                addMessage('AI', response);
-            }, 500);
+
+            // Loading state
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'ai-loading';
+            loadingDiv.style.textAlign = 'left';
+            loadingDiv.innerHTML = '<span style="background:#fff; border:1px solid #eee; padding:0.5rem; border-radius:12px; color:#888;">Typing...</span>';
+            messages.appendChild(loadingDiv);
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                const response = await fetch('/core/api/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: text })
+                });
+
+                const data = await response.json();
+
+                // Remove loading
+                const loader = document.getElementById('ai-loading');
+                if (loader) loader.remove();
+
+                addMessage('AI', data.response);
+
+            } catch (error) {
+                console.error('Error:', error);
+
+                // Remove loading
+                const loader = document.getElementById('ai-loading');
+                if (loader) loader.remove();
+
+                addMessage('AI', "Sorry, I couldn't reach the server. Please check your connection.");
+            }
         }
     }
 
