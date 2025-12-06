@@ -27,8 +27,8 @@
                 <li>
                     <form action="{% url 'logout' %}" method="post" style="display:inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-secondary"
-                            style="background:none; border:none; color:inherit; cursor:pointer;">Logout</button>
+                        <button type="submit" class="nav-btn nav-btn-outline"
+                            style="cursor:pointer; background: transparent;">Logout</button>
                     </form>
                 </li>
                 {% else %}
