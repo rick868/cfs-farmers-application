@@ -20,14 +20,26 @@
                 No Image
             </div>
             {% endif %}
-            <div style="padding: 1rem;">
-                <h3 style="margin-top: 0; margin-bottom: 0.5rem;">{{ listing.crop_name }}</h3>
-                <p style="color: #666; margin-bottom: 0.5rem;">{{ listing.quantity }} • <strong>KES {{
-                        listing.price_per_unit }}</strong></p>
-                <p style="font-size: 0.9rem; color: #888;">📍 {{ listing.location }}</p>
-                <p style="font-size: 0.9rem;">Seller: {{ listing.seller.username }}</p>
-                <a href="#" class="btn btn-accent"
-                    style="width: 100%; display: block; text-align: center; margin-top: 1rem;">Contact Seller</a>
+            <div style="padding: 1.5rem;">
+                <h3 style="margin: 0 0 1rem 0; color: var(--text-color); font-size: 1.25rem;">{{ listing.crop_name }}</h3>
+                
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span style="color: #666; font-size: 0.95rem;">{{ listing.quantity }}</span>
+                    <span style="color: #ddd;">•</span>
+                    <span style="color: var(--primary-color); font-weight: 600; font-size: 1.1rem;">KES {{ listing.price_per_unit }}</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 1rem;">📍</span>
+                    <span style="font-size: 0.9rem; color: #666;">{{ listing.location }}</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+                    <span style="font-size: 1rem;">👤</span>
+                    <span style="font-size: 0.9rem; color: #666;">{{ listing.seller.username }}</span>
+                </div>
+                
+                <a href="#" class="btn btn-accent" style="width: 100%; display: block; text-align: center;">Contact Seller</a>
             </div>
         </div>
         {% empty %}
