@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Soil Test Upload{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Soil Test Upload</h1>
+    <p>Upload soil test results and capture key values. A quick recommendation will be drafted.</p>
+</section>
+
+<section class="card">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-grid">
+            <label>Sample label {{ form.sample_label }}</label>
+            <label>Location {{ form.location }}</label>
+            <label>Crop {{ form.crop }}</label>
+            <label>File {{ form.file_upload }}</label>
+            <label>pH {{ form.ph }}</label>
+            <label>Nitrogen (ppm) {{ form.nitrogen }}</label>
+            <label>Phosphorus (ppm) {{ form.phosphorus }}</label>
+            <label>Potassium (ppm) {{ form.potassium }}</label>
+        </div>
+        <div class="form-block">
+            <label>Notes {{ form.notes }}</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</section>
+{% endblock %}
+

@@ -4,10 +4,11 @@
 <div class="container">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
         <h1 style="color: var(--primary-color);">Marketplace</h1>
+        {% if user.is_authenticated and user.role == "FARMER" %}
         <a href="{% url 'create_listing' %}" class="btn btn-primary">+ Sell Produce</a>
+        {% endif %}
     </div>
 
-    <!-- Listings Grid -->
     <div class="grid">
         {% for listing in listings %}
         <div class="card" style="padding: 0; overflow: hidden;">
@@ -21,25 +22,26 @@
             </div>
             {% endif %}
             <div style="padding: 1.5rem;">
-                <h3 style="margin: 0 0 1rem 0; color: var(--text-color); font-size: 1.25rem;">{{ listing.crop_name }}</h3>
-                
+                <h3 style="margin: 0 0 0.5rem 0; color: var(--text-color); font-size: 1.25rem;">{{ listing.crop_name }}</h3>
+                <span class="badge" style="margin-bottom: 0.75rem; display:inline-block;">{{ listing.get_status_display }}</span>
+
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
                     <span style="color: #666; font-size: 0.95rem;">{{ listing.quantity }}</span>
                     <span style="color: #ddd;">•</span>
                     <span style="color: var(--primary-color); font-weight: 600; font-size: 1.1rem;">KES {{ listing.price_per_unit }}</span>
                 </div>
-                
+
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                     <span style="font-size: 1rem;">📍</span>
                     <span style="font-size: 0.9rem; color: #666;">{{ listing.location }}</span>
                 </div>
-                
+
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
                     <span style="font-size: 1rem;">👤</span>
                     <span style="font-size: 0.9rem; color: #666;">{{ listing.seller.username }}</span>
                 </div>
-                
-                <a href="#" class="btn btn-accent" style="width: 100%; display: block; text-align: center;">Contact Seller</a>
+
+                <a href="{% url 'listing_detail' listing.pk %}" class="btn btn-accent" style="width: 100%; display: block; text-align: center;">View & Purchase</a>
             </div>
         </div>
         {% empty %}

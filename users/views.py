@@ -4,7 +4,9 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponse
 import json
+
 from .forms import CustomUserCreationForm
+from core.models import FarmerInquiry, FollowUpFlag
 from core.services import get_weather_data, get_market_prices, get_farming_tips, get_officer_stats
 
 class SignUpView(CreateView):
@@ -28,9 +30,13 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 'farming_tip': get_farming_tips(),
             })
         elif self.request.user.role == "OFFICER":
+            inquiry_count = FarmerInquiry.objects.filter(status="NEW").count()
+            followup_count = FollowUpFlag.objects.exclude(status="DONE").count()
             context.update({
                 'stats': get_officer_stats(),
-                'recent_alerts': ["Fall Armyworm detected in Sector 4", "Heavy rains expected next week"]
+                'recent_alerts': ["Fall Armyworm detected in Sector 4", "Heavy rains expected next week"],
+                'inquiry_count': inquiry_count,
+                'followup_count': followup_count,
             })
         return context
 

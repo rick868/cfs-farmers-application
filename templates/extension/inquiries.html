@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Ask Queue{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Ask Queue</h1>
+    <p>Newest farmer questions first. Update status after you respond.</p>
+</section>
+
+<section class="card">
+    <div class="stacked">
+        {% for inquiry in inquiries %}
+        <div class="pill">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong>{{ inquiry.name }}</strong>
+                <span class="tag">{{ inquiry.get_status_display }}</span>
+            </div>
+            <small>{{ inquiry.location|default:"Location n/a" }} — {{ inquiry.crop|default:"General" }}</small><br>
+            <p>{{ inquiry.question|truncatechars:220 }}</p>
+            <small>Preferred: {{ inquiry.get_preferred_contact_display }} ({{ inquiry.contact_value }})</small>
+            {% if inquiry.preferred_language %}<small> • Lang: {{ inquiry.preferred_language }}</small>{% endif %}
+        </div>
+        {% empty %}
+        <p>No questions yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% if is_paginated %}
+<div class="pagination">
+    {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Previous</a>{% endif %}
+    <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+    {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+}</div>
+{% endif %}
+{% endblock %}
+

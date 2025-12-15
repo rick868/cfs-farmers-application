@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Farmer Groups{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Farmer Groups & Cooperatives</h1>
+    <p>Create or join a group for bulk buying/selling and shared training.</p>
+</section>
+
+<section class="card">
+    <h2>Create a Group</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-grid">
+            <label>Name {{ form.name }}</label>
+            <label>Region {{ form.region }}</label>
+            <label>Purpose {{ form.purpose }}</label>
+            <label>Contact phone {{ form.contact_phone }}</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Create group</button>
+    </form>
+</section>
+
+<section class="card">
+    <h2>Existing Groups</h2>
+    <div class="stacked">
+        {% for group in groups %}
+        <div class="pill">
+            <strong>{{ group.name }}</strong> — {{ group.region|default:"Region not set" }}<br>
+            <span>{{ group.purpose }}</span><br>
+            <small>Contact: {{ group.contact_phone|default:"N/A" }}</small>
+        </div>
+        {% empty %}
+        <p>No groups yet.</p>
+        {% endfor %}
+    </div>
+    <a class="btn btn-secondary" href="{% url 'extension_groups_join' %}">Join a group</a>
+</section>
+{% endblock %}
+

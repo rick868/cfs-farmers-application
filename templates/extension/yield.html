@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Yield Tracking{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Yield Tracking</h1>
+    <p>Record yields to compare across seasons and regions.</p>
+</section>
+
+<section class="card">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-grid">
+            <label>Crop {{ form.crop }}</label>
+            <label>Area (acres) {{ form.area_acres }}</label>
+            <label>Yield (total) {{ form.yield_qty }}</label>
+            <label>Season {{ form.season }}</label>
+            <label>Region {{ form.region }}</label>
+        </div>
+        <div class="form-block">
+            <label>Notes {{ form.notes }}</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Save yield</button>
+    </form>
+</section>
+{% endblock %}
+

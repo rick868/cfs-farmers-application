@@ -82,6 +82,21 @@ nav a.active {
     color: var(--primary-color);
 }
 
+.nav-extension {
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(46, 125, 50, 0.2);
+    background: linear-gradient(90deg, rgba(46, 125, 50, 0.08), rgba(129, 199, 132, 0.08));
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.nav-extension:hover {
+    border-color: rgba(46, 125, 50, 0.35);
+    background: linear-gradient(90deg, rgba(46, 125, 50, 0.14), rgba(129, 199, 132, 0.14));
+    color: var(--primary-color);
+}
+
 /* Glassmorphism Cards */
 .card {
     background: rgba(255, 255, 255, 0.95);
@@ -137,6 +152,47 @@ nav a.active {
     font-weight: bold;
 }
 
+.market-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.market-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.8fr;
+    align-items: center;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.market-row:last-child {
+    border-bottom: none;
+}
+
+.market-price-tag {
+    justify-self: center;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.market-change-up {
+    color: green;
+    font-weight: 600;
+    justify-self: end;
+}
+
+.market-change-down {
+    color: red;
+    font-weight: 600;
+    justify-self: end;
+}
+
+.muted {
+    color: #777;
+    font-size: 0.9rem;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -183,6 +239,111 @@ nav a.active {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.5rem;
+}
+
+.sidebar {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 0.5rem 0.35rem;
+    color: #444;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    background: rgba(46, 125, 50, 0.08);
+    color: var(--primary-color);
+}
+
+.sidebar-section+.sidebar-section {
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-main {
+    min-width: 0;
+}
+
+.metric-lg {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.alert-card {
+    background-color: #FFF3E0;
+    border-color: #FFE0B2;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(46, 125, 50, 0.1);
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: 1px solid rgba(46, 125, 50, 0.2);
+}
+
+.form-styled label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+.form-styled input,
+.form-styled select,
+.form-styled textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.form-styled input:focus,
+.form-styled select:focus,
+.form-styled textarea:focus {
+    outline: 2px solid rgba(46, 125, 50, 0.2);
+    border-color: var(--primary-color);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.form-field.full {
+    grid-column: 1 / -1;
 }
 
 /* Auth Forms */
@@ -418,6 +579,7 @@ nav a.active {
 .footer-col ul li a:hover {
     color: var(--secondary-color);
 }
+
 /* Animated Partner Logos */
 .partner-logos-container {
     overflow: hidden;
@@ -431,12 +593,18 @@ nav a.active {
     display: inline-flex;
     gap: 3rem;
     animation: scroll 20s linear infinite;
-    animation-delay: 2s; /* Requested delay */
+    animation-delay: 2s;
+    /* Requested delay */
 }
 
 @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } 
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .partner-logos-track:hover {

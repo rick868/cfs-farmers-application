@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Input Calculator{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Input Calculator (Quick Reference)</h1>
+    <p>Use these baseline rates for discussions; adjust to local recommendations.</p>
+</section>
+
+<section class="card">
+    <h2>Presets</h2>
+    <div class="grid">
+        {% for preset in presets %}
+        <div class="pill">
+            <strong>{{ preset.crop }}</strong><br>
+            <span>Seed rate: {{ preset.seed_rate }}</span><br>
+            <span>Fertilizer: {{ preset.fertilizer }}</span>
+        </div>
+        {% empty %}
+        <p>Add crop presets here.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>How to use</h2>
+    <ol class="list">
+        <li>Confirm local extension recommendation for the variety.</li>
+        <li>Adjust for soil test results and irrigation method.</li>
+        <li>Split fertilizer into planting + top-dress where applicable.</li>
+    </ol>
+</section>
+{% endblock %}
+

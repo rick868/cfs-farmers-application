@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Extension Officer Hub{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Extension Officer</h1>
+    <p>Use this page to brief farmers now while we build richer automation. Share the hotline, training times, and the
+        latest bulletins below.</p>
+    <div class="stacked">
+        <a class="btn btn-secondary" href="{% url 'extension_knowledge' %}">Knowledge library</a>
+        <a class="btn btn-secondary" href="{% url 'extension_ask' %}">Ask an expert</a>
+        <a class="btn btn-secondary" href="{% url 'extension_dashboard' %}">Officer dashboard</a>
+        <a class="btn btn-secondary" href="{% url 'extension_soil' %}">Soil tests</a>
+        <a class="btn btn-secondary" href="{% url 'extension_yield' %}">Yield tracking</a>
+        <a class="btn btn-secondary" href="{% url 'extension_prices' %}">Price & demand</a>
+        <a class="btn btn-secondary" href="{% url 'extension_calculator' %}">Input calculator</a>
+        <a class="btn btn-secondary" href="{% url 'extension_groups' %}">Farmer groups</a>
+        <a class="btn btn-secondary" href="{% url 'extension_compliance' %}">GAP/Organic</a>
+        <a class="btn btn-secondary" href="{% url 'extension_traceability' %}">Traceability</a>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Immediate Advisories & Bulletins</h2>
+    <div class="stacked">
+        {% for item in bulletins %}
+        <div class="pill">
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.detail }}</p>
+        </div>
+        {% empty %}
+        <p>No bulletins yet. Add your weekly advisory notes here.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Training Schedule</h2>
+    <p>Invite farmers to join a session. Update times as needed.</p>
+    <ul class="list">
+        {% for session in training_sessions %}
+        <li>
+            <strong>{{ session.title }}</strong><br>
+            <span>{{ session.time }}</span><br>
+            <em>{{ session.link }}</em>
+        </li>
+        {% empty %}
+        <li>Schedule coming soon.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Support Contacts</h2>
+    <div class="stacked">
+        <div class="pill"><strong>Hotline:</strong> {{ support_contacts.hotline }}</div>
+        <div class="pill"><strong>WhatsApp:</strong> {{ support_contacts.whatsapp }}</div>
+        <div class="pill"><strong>Email:</strong> {{ support_contacts.email }}</div>
+        <div class="pill"><strong>Hours:</strong> {{ support_contacts.hours }}</div>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Platform Benefits (tell farmers)</h2>
+    <ul class="list">
+        {% for benefit in benefits %}
+        <li>{{ benefit }}</li>
+        {% empty %}
+        <li>Add benefit statements here.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Data Privacy (reassure farmers)</h2>
+    <ul class="list">
+        {% for point in privacy_points %}
+        <li>{{ point }}</li>
+        {% empty %}
+        <li>State how data is handled and who can access it.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Early Wins & Success Stories</h2>
+    <div class="grid">
+        {% for win in early_wins %}
+        <div class="pill">
+            <strong>{{ win.title }}</strong> — {{ win.metric }}<br>
+            <span>{{ win.detail }}</span>
+        </div>
+        {% empty %}
+        <p>Share 2–3 quick wins to build trust.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>How to use this now</h2>
+    <ol class="list">
+        <li>Read the latest bulletins to brief farmers this week.</li>
+        <li>Share hotline/WhatsApp and invite them to the next training.</li>
+        <li>Remind them of benefits and privacy commitments.</li>
+        <li>Collect questions during visits and log them for follow-up.</li>
+    </ol>
+</section>
+{% endblock %}

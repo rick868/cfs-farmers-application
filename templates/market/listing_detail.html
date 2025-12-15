@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}{{ listing.crop_name }}{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card" style="overflow:hidden; padding:0;">
+    {% if listing.image %}
+    <img src="{{ listing.image.url }}" alt="{{ listing.crop_name }}"
+        style="width: 100%; max-height: 280px; object-fit: cover;">
+    {% endif %}
+    <div style="padding: 1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h1 style="margin:0;">{{ listing.crop_name }}</h1>
+            <span class="badge">{{ listing.get_status_display }}</span>
+        </div>
+        <p style="margin:0.5rem 0 0.25rem 0; color:#555;">{{ listing.quantity }} • KES {{ listing.price_per_unit }}</p>
+        <p style="margin:0; color:#555;">Pickup: {{ listing.pickup_point|default:listing.location }}</p>
+        <p style="margin:0.25rem 0 1rem 0; color:#777;">Seller: {{ listing.seller.username }}</p>
+
+        {% if listing.tracking_note %}
+        <div class="pill" style="margin-bottom: 1rem;">
+            <strong>Tracking</strong><br>
+            <span>{{ listing.tracking_note }}</span>
+        </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        {% if listing.status == "AVAILABLE" and listing.seller != user %}
+        <form method="post" action="{% url 'listing_purchase' listing.pk %}" class="form-styled"
+            style="margin-bottom:1rem;">
+            {% csrf_token %}
+            <label>Mobile (M-Pesa)</label>
+            <input type="text" name="phone" placeholder="07xx..." required>
+            <small class="muted">You will get an M-Pesa prompt for KES {{ listing.price_per_unit }}.</small>
+            <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;">Send STK Push</button>
+        </form>
+        <form method="post" action="{% url 'listing_confirm' listing.pk %}" class="form-styled">
+            {% csrf_token %}
+            <label>Enter OTP</label>
+            <input type="text" name="otp" placeholder="6-digit code" required>
+            <button type="submit" class="btn btn-accent" style="margin-top:0.5rem;">Confirm Purchase</button>
+        </form>
+        {% elif listing.buyer == user %}
+        <p><strong>You purchased this item.</strong> Status: {{ listing.get_status_display }}</p>
+        {% endif %}
+        {% elif listing.seller == user or user.role == "OFFICER" %}
+        <div class="card" style="margin-top:1rem;">
+            <h3>Update Status</h3>
+            <form method="post" action="{% url 'listing_status_update' listing.pk %}" class="form-styled">
+                {% csrf_token %}
+                <label>Status</label>
+                <select name="status" required>
+                    <option value="PROCESSING" {% if listing.status == "PROCESSING" %}selected{% endif %}>Processing</option>
+                    <option value="SHIPPED" {% if listing.status == "SHIPPED" %}selected{% endif %}>Shipped</option>
+                    <option value="DELIVERED" {% if listing.status == "DELIVERED" %}selected{% endif %}>Delivered</option>
+                </select>
+                <label>Tracking note</label>
+                <textarea name="tracking_note" rows="3" placeholder="e.g., Dispatched via courier">{{ listing.tracking_note }}</textarea>
+                <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;">Save</button>
+            </form>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}?next={% url 'listing_detail' listing.pk %}" class="btn btn-primary">Login to
+            purchase</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

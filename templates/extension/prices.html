@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Price Trends & Demand{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Price Trends & Demand Signals</h1>
+    <p>Share weekly price movements and buyer demand so farmers can time sales.</p>
+</section>
+
+<section class="card">
+    <h2>Weekly Price Trends (KSh/kg)</h2>
+    <div class="grid">
+        {% for item in price_trends %}
+        <div class="pill">
+            <strong>{{ item.crop }}</strong><br>
+            <span>Last week: {{ item.last_week }}</span><br>
+            <span>This week: {{ item.this_week }}</span><br>
+            <em>Trend: {{ item.trend }} — {{ item.action }}</em>
+        </div>
+        {% empty %}
+        <p>Add price snapshots weekly.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Buyer Demand</h2>
+    <div class="stacked">
+        {% for demand in demand_signals %}
+        <div class="pill">
+            <strong>{{ demand.buyer }}</strong><br>
+            <span>{{ demand.crop }} — {{ demand.quantity }}</span><br>
+            <em>Offer: {{ demand.price }}</em>
+        </div>
+        {% empty %}
+        <p>Add buyer leads when available.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

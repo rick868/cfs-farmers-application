@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Ask an Expert{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Ask an Expert</h1>
+    <p>Submit a question. We will respond via your preferred channel.</p>
+    <div class="pill" style="margin-top:0.5rem;">
+        <strong>Tip:</strong> Add crop and location so we can tailor advice.
+    </div>
+</section>
+
+<section class="card">
+    <form method="post" class="form-styled">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-grid">
+            <div class="form-field">
+                <label>Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-field">
+                <label>Location</label>
+                {{ form.location }}
+            </div>
+            <div class="form-field">
+                <label>Crop</label>
+                {{ form.crop }}
+            </div>
+            <div class="form-field">
+                <label>Preferred contact</label>
+                {{ form.preferred_contact }}
+            </div>
+            <div class="form-field">
+                <label>Contact value</label>
+                {{ form.contact_value }}
+            </div>
+            <div class="form-field">
+                <label>Preferred language</label>
+                {{ form.preferred_language }}
+            </div>
+        </div>
+        <div class="form-block">
+            <label>Question</label>
+            {{ form.question }}
+        </div>
+        <button type="submit" class="btn btn-primary">Send question</button>
+    </form>
+</section>
+
+<section class="card">
+    <h2>What happens next?</h2>
+    <ol class="list">
+        <li>We review within one business day.</li>
+        <li>We contact you via your selected channel.</li>
+        <li>If a field visit is needed, we schedule it.</li>
+    </ol>
+</section>
+{% endblock %}

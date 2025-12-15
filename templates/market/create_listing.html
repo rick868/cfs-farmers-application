@@ -1,12 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="auth-container">
-    <h2>Sell Your Produce</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Post Listing</button>
-    </form>
+<div class="container narrow">
+    <section class="card">
+        <h1 style="margin-top:0;">Sell Your Produce</h1>
+        <p style="color:#555; margin-bottom:1.2rem;">Share your listing with buyers. Add clear quantities, price, and pickup point.</p>
+        <form method="post" enctype="multipart/form-data" class="form-styled">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-field">
+                    <label>Crop name</label>
+                    {{ form.crop_name }}
+                </div>
+                <div class="form-field">
+                    <label>Quantity</label>
+                    {{ form.quantity }}
+                </div>
+                <div class="form-field">
+                    <label>Price per unit (KES)</label>
+                    {{ form.price_per_unit }}
+                </div>
+                <div class="form-field">
+                    <label>Location</label>
+                    {{ form.location }}
+                </div>
+                <div class="form-field">
+                    <label>Pickup point</label>
+                    {{ form.pickup_point }}
+                </div>
+                <div class="form-field full">
+                    <label>Image</label>
+                    {{ form.image }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Post Listing</button>
+        </form>
+    </section>
 </div>
 {% endblock %}

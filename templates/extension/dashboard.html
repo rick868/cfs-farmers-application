@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Extension Dashboard{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Extension Officer Dashboard</h1>
+    <p>Track farmer questions, follow-ups, reminders, and quick loan/insurance guidance.</p>
+    <div class="stacked">
+        <a class="btn btn-secondary" href="{% url 'extension_ask' %}">Log new question</a>
+        <a class="btn btn-secondary" href="{% url 'extension_knowledge' %}">Knowledge library</a>
+        <a class="btn btn-secondary" href="{% url 'extension_groups' %}">Farmer groups</a>
+        <a class="btn btn-secondary" href="{% url 'extension_compliance' %}">GAP/Organic</a>
+        <a class="btn btn-secondary" href="{% url 'extension_traceability' %}">Traceability</a>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Open Questions</h2>
+    <p class="muted">Newest first. Move status to keep the queue clean.</p>
+    <div class="stacked" style="margin-bottom:0.75rem;">
+        <a class="btn btn-secondary" href="{% url 'extension_inquiries' %}">View all questions</a>
+        <a class="btn btn-secondary" href="{% url 'extension_ask' %}">Log new question</a>
+    </div>
+    <div class="stacked">
+        {% for inquiry in open_inquiries %}
+        <div class="pill">
+            <strong>{{ inquiry.name }}</strong> — {{ inquiry.crop|default:"General" }}<br>
+            <span class="badge">{{ inquiry.get_status_display }}</span><br>
+            <p>{{ inquiry.question|truncatechars:140 }}</p>
+            <small>Preferred: {{ inquiry.get_preferred_contact_display }} ({{ inquiry.contact_value }})</small>
+        </div>
+        {% empty %}
+        <p>No questions yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Follow-ups</h2>
+    <p class="muted">Prioritized by priority and due date.</p>
+    <div class="stacked" style="margin-bottom:0.75rem;">
+        <a class="btn btn-secondary" href="{% url 'extension_followups' %}">View all follow-ups</a>
+    </div>
+    <div class="stacked">
+        {% for item in followups %}
+        <div class="pill">
+            <strong>{{ item.farmer }}</strong> — {{ item.topic }}<br>
+            <span class="badge">{{ item.get_priority_display }}</span>
+            <span class="badge">{{ item.get_status_display }}</span><br>
+            {% if item.due_date %}<small>Due: {{ item.due_date }}</small>{% endif %}
+            <p>{{ item.note }}</p>
+        </div>
+        {% empty %}
+        <p>No follow-ups logged yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Seasonal Reminders</h2>
+    <ul class="list">
+        {% for reminder in reminders %}
+        <li><strong>{{ reminder.title }}</strong>: {{ reminder.detail }}</li>
+        {% empty %}
+        <li>Add reminders to keep officers aligned.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Loan & Insurance Guidance</h2>
+    <div class="grid">
+        {% for guide in loan_insurance_guides %}
+        <div class="pill">
+            <strong>{{ guide.title }}</strong>
+            <ul class="list">
+                {% for item in guide.items %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Farmer Groups</h2>
+    <div class="stacked">
+        {% for group in groups %}
+        <div class="pill">
+            <strong>{{ group.name }}</strong> — {{ group.region|default:"Region not set" }}<br>
+            <span>{{ group.purpose }}</span>
+        </div>
+        {% empty %}
+        <p>No groups yet. Create one to organize follow-ups.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Traceability</h2>
+    <div class="stacked">
+        {% for item in traceability %}
+        <div class="pill">
+            <strong>{{ item.crop }}</strong> — {{ item.batch_code }}<br>
+            <span>{{ item.location|default:"" }}</span>
+        </div>
+        {% empty %}
+        <p>No traceability records yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

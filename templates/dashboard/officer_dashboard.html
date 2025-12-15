@@ -1,25 +1,54 @@
 <div class="grid">
     <div class="card">
         <h3>Overview</h3>
-        <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">{{ stats.region }} Region</div>
+        <div class="metric-lg">{{ stats.region }} Region</div>
         <p>Assigned Farmers: <strong>{{ stats.assigned_farmers }}</strong></p>
         <p>Pending Visits: <strong>{{ stats.pending_visits }}</strong></p>
     </div>
 
-    <div class="card" style="background-color: #FFF3E0; border-color: #FFE0B2;">
-        <h3 style="color: #E65100;">⚠️ Active Alerts</h3>
-        <ul style="padding-left: 1.2rem;">
+    <div class="card alert-card">
+        <h3>⚠️ Active Alerts</h3>
+        <ul class="list">
             {% for alert in recent_alerts %}
             <li>{{ alert }}</li>
             {% endfor %}
         </ul>
-        <button class="btn btn-accent" style="width: 100%; margin-top: 1rem;">Broadcast New Alert</button>
+        <a class="btn btn-accent" style="width: 100%; margin-top: 1rem;" href="{% url 'extension_inquiries' %}">View Ask Queue</a>
+    </div>
+    <div class="card">
+        <h3>Queues</h3>
+        <div class="stacked">
+            <div class="pill">
+                <strong>New Questions</strong>
+                <span class="badge">{{ inquiry_count|default:0 }}</span>
+            </div>
+            <div class="pill">
+                <strong>Open Follow-ups</strong>
+                <span class="badge">{{ followup_count|default:0 }}</span>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="card">
-    <h3>🌾 Regional Crop Distribution</h3>
-    <canvas id="cropChart" style="max-height: 400px;"></canvas>
+<div class="grid">
+    <div class="card">
+        <h3>🌾 Regional Crop Distribution</h3>
+        <canvas id="cropChart" style="max-height: 360px;"></canvas>
+    </div>
+    <div class="card">
+        <h3>Extension Tools</h3>
+        <p class="muted">Jump into the tools you use most.</p>
+        <div class="stacked">
+            <a class="btn btn-secondary" href="{% url 'extension_dashboard' %}">Extension Dashboard</a>
+            <a class="btn btn-secondary" href="{% url 'extension_inquiries' %}">Ask Queue</a>
+            <a class="btn btn-secondary" href="{% url 'extension_followups' %}">Follow-ups</a>
+            <a class="btn btn-secondary" href="{% url 'extension_soil' %}">Soil Tests</a>
+            <a class="btn btn-secondary" href="{% url 'extension_yield' %}">Yields</a>
+            <a class="btn btn-secondary" href="{% url 'extension_groups' %}">Farmer Groups</a>
+            <a class="btn btn-secondary" href="{% url 'extension_traceability' %}">Traceability</a>
+            <a class="btn btn-secondary" href="{% url 'extension_compliance' %}">GAP/Organic</a>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

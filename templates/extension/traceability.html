@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Traceability{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Traceability Records</h1>
+    <p>Create batch codes and share them with buyers. Add a QR later if needed.</p>
+</section>
+
+<section class="card">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-grid">
+            <label>Crop {{ form.crop }}</label>
+            <label>Batch code {{ form.batch_code }}</label>
+            <label>Location {{ form.location }}</label>
+            <label>Harvest date {{ form.harvest_date }}</label>
+        </div>
+        <div class="form-block">
+            <label>Description {{ form.description }}</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Create record</button>
+    </form>
+</section>
+
+<section class="card">
+    <h2>Recent Records</h2>
+    <div class="stacked">
+        {% for rec in records %}
+        <div class="pill">
+            <strong>{{ rec.crop }}</strong> — {{ rec.batch_code }}<br>
+            <span>{{ rec.location|default:"Location not set" }}</span><br>
+            {% if rec.harvest_date %}<small>Harvest: {{ rec.harvest_date }}</small><br>{% endif %}
+            <p>{{ rec.description|default:"No description" }}</p>
+        </div>
+        {% empty %}
+        <p>No records yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

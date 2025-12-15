@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Knowledge Library{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Knowledge Library</h1>
+    <p>Curated resources for farmers. Share links during visits or via SMS/WhatsApp.</p>
+</section>
+
+<section class="card">
+    <h2>Video Tutorials</h2>
+    <ul class="list">
+        {% for video in videos %}
+        <li><strong>{{ video.title }}</strong> — {{ video.length }} <em>{{ video.link }}</em></li>
+        {% empty %}
+        <li>Add video links here.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>How-tos & Guides</h2>
+    <ul class="list">
+        {% for item in howtos %}
+        <li><strong>{{ item.title }}</strong> <span class="tag">{{ item.tag }}</span></li>
+        {% empty %}
+        <li>Add short how-to items.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Success Stories</h2>
+    <div class="grid">
+        {% for story in success_stories %}
+        <div class="pill">
+            <strong>{{ story.title }}</strong><br>
+            <span>{{ story.region }}</span><br>
+            <p>{{ story.detail }}</p>
+        </div>
+        {% empty %}
+        <p>Share pilot wins to build trust.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Seasonal Calendar</h2>
+    <ul class="list">
+        {% for item in seasonal_calendar %}
+        <li><strong>{{ item.crop }}</strong>: {{ item.window }}</li>
+        {% empty %}
+        <li>Add key windows per crop/region.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Languages</h2>
+    <p>Prepare content in: {{ languages|join:", " }}.</p>
+</section>
+{% endblock %}
+

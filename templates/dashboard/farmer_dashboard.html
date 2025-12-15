@@ -21,17 +21,22 @@
 <div class="grid">
     <div class="card">
         <h3>💰 Market Prices</h3>
-        <div class="market-ticker">
+        <div class="market-list">
             {% for item in market_prices %}
-            <div class="market-ticker-item">
-                <span>{{ item.crop }}</span>
-                <span style="font-weight: bold;">KES {{ item.price }}</span>
-                <span class="{% if '+' in item.change %}price-up{% else %}price-down{% endif %}">{{ item.change
-                    }}</span>
+            <div class="market-row">
+                <div>
+                    <strong>{{ item.crop }}</strong>
+                    <div class="muted">Per unit price</div>
+                </div>
+                <div class="market-price-tag">KES {{ item.price }}</div>
+                <div class="{% if '+' in item.change %}market-change-up{% else %}market-change-down{% endif %}">
+                    {{ item.change }}
+                </div>
             </div>
             {% endfor %}
         </div>
-        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">View All Markets</a>
+        <a href="{% url 'marketplace' %}" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Open
+            Marketplace</a>
     </div>
 
     <div class="card">
@@ -59,6 +64,10 @@
                     style="text-align: center; font-size: 0.9rem;">Policy Center</a>
                 <a href="{% url 'service_locator' %}" class="btn btn-secondary"
                     style="text-align: center; font-size: 0.9rem;">Find Services</a>
+                <a href="{% url 'extension_groups' %}" class="btn btn-secondary"
+                    style="text-align: center; font-size: 0.9rem;">Farmer Groups</a>
+                <a href="{% url 'extension_traceability' %}" class="btn btn-secondary"
+                    style="text-align: center; font-size: 0.9rem;">Traceability</a>
             </div>
         </div>
     </div>
@@ -67,6 +76,21 @@
 <div class="card">
     <h3>📊 Yield History (Bags/Acre)</h3>
     <canvas id="yieldChart"></canvas>
+</div>
+
+<div class="card">
+    <h3>🌐 Languages</h3>
+    <p>Content available in English and Swahili. Ask support to request another language.</p>
+</div>
+
+<div class="card">
+    <h3>🤝 Extension Support</h3>
+    <p>Send questions to extension officers and get tailored advice.</p>
+    <div class="stacked">
+        <a href="{% url 'extension_ask' %}" class="btn btn-secondary">Ask an Expert</a>
+        <a href="{% url 'extension_groups' %}" class="btn btn-secondary">Find Farmer Groups</a>
+        <a href="{% url 'extension_traceability' %}" class="btn btn-secondary">My Traceability Records</a>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

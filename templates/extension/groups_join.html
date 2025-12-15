@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Join Group{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Join a Group</h1>
+    <p>Select a group to join. Officers can approve or manage membership later.</p>
+</section>
+
+<section class="card">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label>Group {{ form.group }}</label>
+        <label>Role {{ form.role }}</label>
+        <button type="submit" class="btn btn-primary">Join</button>
+    </form>
+</section>
+{% endblock %}
+

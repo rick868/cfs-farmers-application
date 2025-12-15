@@ -8,9 +8,57 @@
     </div>
 
     {% if user.role == "FARMER" %}
-    {% include 'dashboard/farmer_dashboard.html' %}
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h4>Farmer Hub</h4>
+                <a href="{% url 'dashboard' %}">Home</a>
+                <a href="{% url 'marketplace' %}">Marketplace</a>
+                <a href="{% url 'loan_request' %}">Loans</a>
+                <a href="{% url 'insurance_apply' %}">Insurance</a>
+                <a href="{% url 'financial_literacy' %}">Financial Tips</a>
+                <a href="{% url 'policy_list' %}">Policy Center</a>
+                <a href="{% url 'service_locator' %}">Service Locator</a>
+                <a href="{% url 'extension_groups' %}">Farmer Groups</a>
+                <a href="{% url 'extension_traceability' %}">Traceability</a>
+            </div>
+            <div class="sidebar-section">
+                <h4>Reports</h4>
+                <a href="{% url 'reports' %}">My Reports</a>
+                <a href="{% url 'download_data' %}">Download Data</a>
+            </div>
+        </aside>
+        <div class="dashboard-main">
+            {% include 'dashboard/farmer_dashboard.html' %}
+        </div>
+    </div>
     {% elif user.role == "OFFICER" %}
-    {% include 'dashboard/officer_dashboard.html' %}
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h4>Extension Hub</h4>
+                <a href="{% url 'extension_dashboard' %}">Officer Dashboard</a>
+                <a href="{% url 'extension_ask' %}">Ask Queue</a>
+                <a href="{% url 'extension_followups' %}">Follow-ups</a>
+                <a href="{% url 'extension_knowledge' %}">Knowledge</a>
+                <a href="{% url 'extension_soil' %}">Soil Tests</a>
+                <a href="{% url 'extension_yield' %}">Yield Tracking</a>
+                <a href="{% url 'extension_prices' %}">Prices & Demand</a>
+                <a href="{% url 'extension_calculator' %}">Input Calculator</a>
+                <a href="{% url 'extension_groups' %}">Farmer Groups</a>
+                <a href="{% url 'extension_compliance' %}">GAP/Organic</a>
+                <a href="{% url 'extension_traceability' %}">Traceability</a>
+            </div>
+            <div class="sidebar-section">
+                <h4>Admin</h4>
+                <a href="{% url 'reports' %}">Reports</a>
+                <a href="{% url 'download_data' %}">Export My Data</a>
+            </div>
+        </aside>
+        <div class="dashboard-main">
+            {% include 'dashboard/officer_dashboard.html' %}
+        </div>
+    </div>
     {% else %}
     <div class="card">
         <h3>System Status</h3>

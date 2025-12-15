@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Compliance & Certification{% endblock %}
+{% block main_class %}container narrow{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>GAP & Organic Certification Checklist</h1>
+    <p>Use these checkpoints during visits. Export to PDF or share via SMS/WhatsApp.</p>
+</section>
+
+<section class="card">
+    <h2>Good Agricultural Practices (GAP)</h2>
+    <ul class="list">
+        {% for item in gap_checklist %}
+        <li>{{ item }}</li>
+        {% empty %}
+        <li>Add GAP steps here.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Organic Certification Steps</h2>
+    <ul class="list">
+        {% for item in organic_steps %}
+        <li>{{ item }}</li>
+        {% empty %}
+        <li>Add organic certification steps here.</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
+
